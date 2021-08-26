@@ -5,6 +5,7 @@
 # fields.
 
 import argparse
+import os
 import sys
 import shlex
 
@@ -130,10 +131,17 @@ if __name__ == "__main__":
     # Open files, read all lines as array
     logfilelines=[]
     for logfile in logfiles:
+        if os.path.isdir(logfile):
+            for (dirpath, dirnames, filenames) in os.walk(logfile):
+                logfiles.extend([os.path.join(dirpath, s) for s in filenames])
+                break
+            logfiles.remove(logfile)
+    if args.verbose > 0:
+        print(logfiles)
+    for logfile in logfiles:
         try:
             with open(logfile) as f:
                 logfilelines += f.readlines()
         except Exception as e:
             print("Unexpected error: ", sys.exc_info()[0])
-
     locals()[parsefuncs[parsefunc]](logfilelines)
