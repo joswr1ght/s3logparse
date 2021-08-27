@@ -1,5 +1,7 @@
 # s3logparse.py - A Simple Parser for AWS S3 Logs
 
+[![Python application](https://github.com/dpendolino/s3logparse/actions/workflows/python-app.yml/badge.svg)](https://github.com/dpendolino/s3logparse/actions/workflows/python-app.yml)
+
 > Joshua Wright | [josh@willhackforsushi.com](mailto:josh@willhackforsushi.com)
 
 
