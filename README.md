@@ -81,3 +81,28 @@ Like `toptalkers`, but only for GET/downloads.
 
 Identifies a list of files with a cumulative frequency of uploads and
 downloads.
+
+## Tests
+
+```bash
+❯ pip3 install -r tests/requirements.txt
+...
+❯ pytest tests -v
+======================================================== test session starts ========================================================
+platform linux -- Python 3.9.6, pytest-6.2.4, py-1.10.0, pluggy-0.13.1 -- /usr/bin/python
+cachedir: .pytest_cache
+rootdir: /home/dpendolino/git/s3logparse
+plugins: mock-3.1.1
+collected 6 items
+
+tests/s3logparse_test.py::test_humanreadablesize PASSED                                                                       [ 16%]
+tests/s3logparse_test.py::test_main_toptalkers PASSED                                                                         [ 33%]
+tests/s3logparse_test.py::test_main_useragent PASSED                                                                          [ 50%]
+tests/s3logparse_test.py::test_main_topuploaders PASSED                                                                       [ 66%]
+tests/s3logparse_test.py::test_main_topdownloaders PASSED                                                                     [ 83%]
+tests/s3logparse_test.py::test_main_topfiles PASSED                                                                           [100%]
+
+========================================================= 6 passed in 0.02s =========================================================
+```
+
+_NOTE:_ Sample logs, `tests/test.log`, taken from https://docs.aws.amazon.com/AmazonS3/latest/userguide/LogFormat.html

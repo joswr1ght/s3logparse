@@ -113,7 +113,7 @@ def humanreadablesize(size, decimal_places=2):
         size /= 1024.0
     return f"{size:.{decimal_places}f} {unit}"
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(prog="s3logparse.py", description=__doc__)
     parser.add_argument("function", help=f"{'|'.join(parsefuncs.keys())}")
     parser.add_argument("logfiles", help="Path to log file(s)", nargs="*")
@@ -144,4 +144,7 @@ if __name__ == "__main__":
                 logfilelines += f.readlines()
         except Exception as e:
             print("Unexpected error: ", sys.exc_info()[0])
-    locals()[parsefuncs[parsefunc]](logfilelines)
+    globals()[parsefuncs[parsefunc]](logfilelines)
+
+if __name__ == "__main__":
+    main()
