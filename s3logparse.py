@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-
+""" s3logparse.py: Extract useful information from AWS S3 logs. """
 # Extract useful information from S3 logs. Some of this can be done in awk, but
 # the use of quoted strings in the S3 logs makes it difficult to reference some
 # fields.
 
+import argparse
+import os
 import sys
 import shlex
 
@@ -111,15 +113,17 @@ def humanreadablesize(size, decimal_places=2):
         size /= 1024.0
     return f"{size:.{decimal_places}f} {unit}"
 
-if __name__ == "__main__":
-    if (len(sys.argv) < 3):
-        print("s3logparse.py: Extract useful information from AWS S3 logs.")
-        print(f"Usage: {sys.argv[0]} [{'|'.join(parsefuncs.keys())}] <log files>")
-        sys.exit(0)
+def main():
+    parser = argparse.ArgumentParser(prog="s3logparse.py", description=__doc__)
+    parser.add_argument("function", help=f"{'|'.join(parsefuncs.keys())}")
+    parser.add_argument("logfiles", help="Path to log file(s)", nargs="*")
+    parser.add_argument('--verbose', '-v',
+                        action='count',
+                        default=0) # allows -vvv to set args.verbose to 3
+    args = parser.parse_args()
 
-    parsefunc = sys.argv[1]
-    logfiles = sys.argv[2:]
-
+    parsefunc = args.function
+    logfiles = args.logfiles
     if (parsefunc not in parsefuncs.keys()):
         print(f"Unsupported request function {parsefunc}.")
         sys.exit(1)
@@ -127,10 +131,20 @@ if __name__ == "__main__":
     # Open files, read all lines as array
     logfilelines=[]
     for logfile in logfiles:
+        if os.path.isdir(logfile):
+            for (dirpath, dirnames, filenames) in os.walk(logfile):
+                logfiles.extend([os.path.join(dirpath, s) for s in filenames])
+                break
+            logfiles.remove(logfile)
+    if args.verbose > 0:
+        print(logfiles)
+    for logfile in logfiles:
         try:
             with open(logfile) as f:
                 logfilelines += f.readlines()
         except Exception as e:
             print("Unexpected error: ", sys.exc_info()[0])
+    globals()[parsefuncs[parsefunc]](logfilelines)
 
-    locals()[parsefuncs[parsefunc]](logfilelines)
+if __name__ == "__main__":
+    main()
