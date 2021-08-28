@@ -1,9 +1,7 @@
 # s3logparse.py - A Simple Parser for AWS S3 Logs
 
-[![Python application](https://github.com/dpendolino/s3logparse/actions/workflows/python-app.yml/badge.svg)](https://github.com/dpendolino/s3logparse/actions/workflows/python-app.yml)
-
+[![Python application](https://github.com/joswr1ght/s3logparse/actions/workflows/python-app.yml/badge.svg)](https://github.com/joswr1ght/s3logparse/actions/workflows/python-app.yml)
 > Joshua Wright | [josh@willhackforsushi.com](mailto:josh@willhackforsushi.com)
-
 
 Sure, you could use CloudWatch, but sometimes you just want to grab some
 stats at the command line.
