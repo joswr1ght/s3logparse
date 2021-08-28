@@ -89,7 +89,7 @@ downloads.
 ```bash
 ❯ pip3 install -r tests/requirements.txt
 ...
-❯ pytest tests -v
+❯ PYTHONPATH='.' pytest tests -v
 ======================================================== test session starts ========================================================
 platform linux -- Python 3.9.6, pytest-6.2.4, py-1.10.0, pluggy-0.13.1 -- /usr/bin/python
 cachedir: .pytest_cache
