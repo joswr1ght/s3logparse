@@ -1,9 +1,7 @@
 # s3logparse.py - A Simple Parser for AWS S3 Logs
 
-[![Python application](https://github.com/dpendolino/s3logparse/actions/workflows/python-app.yml/badge.svg)](https://github.com/dpendolino/s3logparse/actions/workflows/python-app.yml)
-
+[![Python application](https://github.com/joswr1ght/s3logparse/actions/workflows/python-app.yml/badge.svg)](https://github.com/joswr1ght/s3logparse/actions/workflows/python-app.yml)
 > Joshua Wright | [josh@willhackforsushi.com](mailto:josh@willhackforsushi.com)
-
 
 Sure, you could use CloudWatch, but sometimes you just want to grab some
 stats at the command line.
@@ -89,7 +87,7 @@ downloads.
 ```bash
 ❯ pip3 install -r tests/requirements.txt
 ...
-❯ pytest tests -v
+❯ PYTHONPATH='.' pytest tests -v
 ======================================================== test session starts ========================================================
 platform linux -- Python 3.9.6, pytest-6.2.4, py-1.10.0, pluggy-0.13.1 -- /usr/bin/python
 cachedir: .pytest_cache
